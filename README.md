@@ -91,3 +91,24 @@ git push -u origin main
 - **No hard sleeps** — auto-waiting handles timing.
 - **Pages expose, tests assert** — no `expect()` inside a page object.
 - **Assert outcomes** — badge counts, item names, exact error text.
+
+---
+
+## Session 4 — API Testing (added 31 July)
+
+Session 4 adds API testing against Restful-Booker, fully commented, plus a bonus lab.
+**All the Copilot prompts we used today are in [`PROMPTS.md`](PROMPTS.md).**
+
+- `tests/session4/01`–`04` — Lab 4.1: first API test (3 assertion layers), the CRUD chain,
+  auth negatives (403), schema validation.
+- `tests/session4/05`–`08` — bonus: data-driven, a reusable API client (`lib/BookingClient.ts`),
+  negative/security testing, and scaffolding a suite for a brand-new API.
+
+```bash
+npm run test:s4      # run all the API tests (no browser needed)
+```
+
+API tests use Playwright's `request` fixture, so they need no browser. Each file opens
+with a comment explaining what it teaches. Findings we caught in the API: a missing field
+returns **500 (should be 400)**, a negative price is **accepted**, and DELETE returns
+**201** (spec says 200/204).

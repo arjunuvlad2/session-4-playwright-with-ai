@@ -1,0 +1,8 @@
+{
+  "_comment": "Test data for the data-driven lab (tests/05). We separate DATA from LOGIC: one test reads each row here, so adding a case means adding a row, not writing a new test.",
+  "valid": [
+    { "firstname": "Ana",    "lastname": "Kowalska", "totalprice": 150,  "depositpaid": true,  "bookingdates": { "checkin": "2026-09-01", "checkout": "2026-09-05" }, "additionalneeds": "Breakfast" },
+    { "firstname": "Wei",    "lastname": "Chen",     "totalprice": 1,    "depositpaid": false, "bookingdates": { "checkin": "2026-10-10", "checkout": "2026-10-11" } },
+    { "firstname": "Muller", "lastname": "Schmidt",  "totalprice": 9999, "depositpaid": true,  "bookingdates": { "checkin": "2026-12-24", "checkout": "2026-12-31" }, "additionalneeds": "Late checkout" }
+  ]
+}
