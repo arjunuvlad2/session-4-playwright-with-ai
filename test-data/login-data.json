@@ -1,0 +1,7 @@
+[
+  { "username": "standard_user",    "password": "secret_sauce",  "expected": "Success" },
+  { "username": "locked_out_user",   "password": "secret_sauce",  "expected": "Error", "errorContains": "locked out" },
+  { "username": "standard_user",     "password": "wrong_password", "expected": "Error", "errorContains": "do not match" },
+  { "username": "",                  "password": "secret_sauce",  "expected": "Error", "errorContains": "Username is required" },
+  { "username": "standard_user",     "password": "",              "expected": "Error", "errorContains": "Password is required" }
+]

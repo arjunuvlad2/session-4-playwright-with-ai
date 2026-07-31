@@ -1,0 +1,18 @@
+{
+  "name": "qa-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automation Testing Using AI — course project (through Session 3: UI automation)",
+  "scripts": {
+    "test": "playwright test",
+    "test:s2": "playwright test tests/session2",
+    "test:s3": "playwright test tests/session3",
+    "headed": "playwright test --headed",
+    "watch": "playwright test --ui",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen https://www.saucedemo.com"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}

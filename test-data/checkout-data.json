@@ -1,0 +1,12 @@
+{
+  "valid": [
+    { "firstName": "Ana",        "lastName": "Kowalska", "postcode": "M1 2AB" },
+    { "firstName": "Anne-Marie",  "lastName": "O'Brien",  "postcode": "SW1A 1AA" },
+    { "firstName": "Jurgen",      "lastName": "Muller",   "postcode": "90210" }
+  ],
+  "invalid": [
+    { "firstName": "",      "lastName": "Patel", "postcode": "LS1 4DY", "reason": "empty first name", "expectedError": "Error: First Name is required" },
+    { "firstName": "Priya", "lastName": "",      "postcode": "LS1 4DY", "reason": "empty last name",  "expectedError": "Error: Last Name is required" },
+    { "firstName": "Priya", "lastName": "Patel", "postcode": "",        "reason": "empty postcode",   "expectedError": "Error: Postal Code is required" }
+  ]
+}
