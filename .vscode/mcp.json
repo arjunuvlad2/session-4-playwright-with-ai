@@ -1,0 +1,10 @@
+{
+  "//": "Playwright MCP server config for Session 5's live demo and homework.",
+  "//how": "In VS Code, open Copilot Chat, switch to Agent mode, and the 'playwright' tools below become available. Needs Node.js 20+. Restart VS Code after adding this file.",
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}

@@ -143,3 +143,108 @@ Explain this test line by line as if I'm new to API testing. What would make it 
 This test failed. Here is (1) the error, (2) what the test was trying to do, and
 (3) the actual response body. Explain the cause and propose a fix.
 ```
+
+
+---
+
+# Session 5 — Self-Healing & MCP prompts
+
+
+All the contextual prompts from Session 5 (self-healing + agentic AI), in one file.
+Each shows **when** to use it, the **prompt to paste**, and **what to check**.
+
+The golden rule still holds:
+> **AI output is a suspect until your test run (or your own eyes) prove it innocent.**
+
+---
+
+## 1. Resilient locators — make AI a risk analyst, not just a typist
+
+Paste an element's HTML and its surrounding container, then:
+```
+Here is a button's HTML and its parent container: [paste].
+Give me three things: (1) the most resilient Playwright locator for it,
+(2) two ranked fallback locators, and (3) for EACH option, exactly what change to
+the UI would break it. Prefer getByRole and getByText over CSS; never use a
+position-based XPath.
+```
+**Check:** the value is in part (3). If it can't say what would break each locator,
+it doesn't understand the fragility — and neither will you.
+
+**Rank your existing locators by fragility:**
+```
+Here is my page object [paste]. Rank each locator from most to least fragile and
+justify each ranking in one line. Which would be the first to break if a developer
+refactored the page?
+```
+
+---
+
+## 2. The repair prompt pattern — THE most useful technique today
+
+When a test fails, give the AI THREE things — error, intent, current page — and ask
+for a classification BEFORE a fix:
+```
+This Playwright test failed. Here is:
+  1. the error:   [paste the TimeoutError / assertion error]
+  2. the test's intent:   [one sentence — what the test was trying to do]
+  3. the CURRENT page HTML around where the element used to be:
+     [paste the DOM fragment — you can copy it from the trace viewer]
+Classify the failure (rename / move / removal / app-bug / timing), propose the fix
+as a diff to my page object, and state your confidence.
+```
+**Check:** demanding the classification first stops it from blindly patching a
+FEATURE CHANGE that should become a new test instead. Where do you get ingredient 3?
+Playwright's trace viewer (`npm run report` → click the trace icon) holds the DOM
+snapshot at the moment of failure.
+
+---
+
+## 3. Visual validation — let a multimodal model look
+
+```
+Here is a screenshot of a product page. List any visual defects you can see —
+broken or missing images, overlapping elements, misaligned text, wrong colours.
+```
+**Check:** this catches things functional tests are blind to (e.g. broken product
+images that still pass every assertion) — with no baseline needed.
+
+---
+
+## 4. The Playwright MCP live demo — the agent's tasks
+
+With the MCP server configured (see `.vscode/mcp.json`) and Copilot Chat in **agent
+mode**, these are the instructions given to the agent, in order:
+
+**Explore:**
+```
+Open https://www.saucedemo.com, log in as standard_user (password secret_sauce),
+and map what a user can do on the inventory page. Report what you find.
+```
+**Verify a behaviour:**
+```
+Sort the products by price, low to high, and verify the sort is actually correct
+by reading the prices on the page.
+```
+**Write a test from what it saw:**
+```
+Now write a Playwright test file that captures what you just verified, using the
+page-object style in the pages/ folder.
+```
+**The deliberate mistake (to show supervision):**
+```
+Check that the cart works.
+```
+**Check:** the last instruction is intentionally vague. Watch the agent make a
+reasonable-but-wrong interpretation, then correct it. The point: the agent SEES the
+real page (no guessed locators), its test is grounded in what it observed, and it
+still makes mistakes — so your review discipline transfers unchanged.
+
+---
+
+## 5. Homework prompt (set at the end of the day)
+
+```
+Look at one test suite you own. For each locator, tell me what UI change would kill
+it, and rewrite the three most fragile ones to be resilient.
+```

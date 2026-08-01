@@ -112,3 +112,14 @@ API tests use Playwright's `request` fixture, so they need no browser. Each file
 with a comment explaining what it teaches. Findings we caught in the API: a missing field
 returns **500 (should be 400)**, a negative price is **accepted**, and DELETE returns
 **201** (spec says 200/204).
+
+---
+
+## Session 5 — Self-Healing & MCP (added 1 August)
+
+- `tests/session5/resilient-locators.spec.ts` — resilient vs brittle vs page-object
+  locators; the seam where self-healing happens. Run: `npm run test:s5`.
+- `.vscode/mcp.json` — Playwright MCP server config for the agent demo. Open this folder
+  in VS Code, restart, and use Copilot Chat in **Agent** mode.
+- Session 5 Copilot prompts (repair prompt pattern, MCP agent tasks) are in
+  [`PROMPTS.md`](PROMPTS.md).
