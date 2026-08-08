@@ -248,3 +248,58 @@ still makes mistakes — so your review discipline transfers unchanged.
 Look at one test suite you own. For each locator, tell me what UI change would kill
 it, and rewrite the three most fragile ones to be resilient.
 ```
+
+
+---
+
+# Session 6 — Agents & Defect Intelligence prompts
+
+## 1. Lab 6.1 — the agentic workflow contract (write this BEFORE prompting the agent)
+```
+You are a testing agent. Goal: [one sentence].
+Allowed tools: [list]. Forbidden: deleting files, external POSTs, installing anything.
+Work in three phases and STOP for my approval between each:
+  Phase 1 — explore the feature and propose a test plan (do not write tests yet).
+  Phase 2 — after I approve the plan, write the tests as a diff for me to review.
+  Phase 3 — after I approve the diff, run the tests and summarise the results.
+```
+**Check:** it must stop at each checkpoint. In phase 2, reject at least one thing — a weak
+assertion or a hard-coded credential. AI-generated tests always contain something to fix.
+
+## 2. Defect report from evidence
+```
+Write a defect report from this evidence. Test: "checkout total includes tax".
+Expected £32.39 (= £29.99 + 8% tax). Displayed: £29.99. Trace: the total corrected
+itself only after a page refresh.
+Format: Title / Severity + one-line rationale / Steps / Expected vs Actual / Evidence / Env.
+Mark any root-cause you suggest clearly as a HYPOTHESIS, not a fact.
+```
+**Check:** did it ARGUE the severity ("High: a financial figure shown to every customer"),
+and label its guess as a hypothesis? You add the scope-probing (other items, other tax rates).
+
+## 3. Root-cause analysis of a stack trace
+```
+Here is a failing test's stack trace: [paste].
+Explain what happened, in order, in plain English. Then give the most likely root cause
+AND two alternatives, each with the evidence that supports it. Rank them.
+```
+**Check:** insist on ranked, evidenced alternatives — a single confident answer invites
+anchoring on a wrong first guess.
+
+## 4. Lab 7.1 — classify a failure
+```
+Classify this test failure as exactly one of: APP BUG, TEST BUG, ENV, FLAKY, STALE.
+Give your label, your confidence (low/medium/high), and one line of reasoning.
+Failure: [paste the error + trace excerpt + any screenshot note].
+```
+**Check:** the AI over-labels TEST BUG (the test is the only code it can see). On the
+low-confidence ones, read the raw evidence yourself — the final label is YOURS.
+
+## 5. Exercise 7.2 — make a flaky test deterministic
+```
+This test is flaky: it clicks Submit, waits a fixed 1000 ms, then checks for the success
+banner. Explain why it flakes on slow runs, and rewrite it to wait for the CONDITION
+instead of a fixed time. Name the category of flakiness.
+```
+**Check:** the fix must wait for the banner to be visible (`await expect(...).toBeVisible()`),
+not a number. Category: a timing race — the most common cause of all.

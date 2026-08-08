@@ -123,3 +123,18 @@ returns **500 (should be 400)**, a negative price is **accepted**, and DELETE re
   in VS Code, restart, and use Copilot Chat in **Agent** mode.
 - Session 5 Copilot prompts (repair prompt pattern, MCP agent tasks) are in
   [`PROMPTS.md`](PROMPTS.md).
+
+---
+
+## Session 6 — Agents & Defect Intelligence (added 8 August)
+
+- `tests/session6/lab-7.1-failure-triage/` — **Lab 7.1**: 20 real failures to triage. Run
+  `npm run lab:triage` to watch the whole pile go red, then classify each with the five-label
+  taxonomy (the labels aren't in the repo — that's the exercise).
+- `tests/session6/lab-7.2-flaky/` — **Lab 7.2** (`npm run lab:flaky`) shows a test flake;
+  **Exercise 7.2** (`npm run lab:deterministic`) makes you fix one — a fixed-wait flake vs the
+  condition-wait fix, side by side.
+- `tests/session6/lab-6.1-agentic-workflow/` — **Lab 6.1**: drive the MCP agent behind
+  guardrails (pairs). Process lab — its contract and prompts are in the folder README.
+- Session 6 Copilot prompts (agent contract, defect reports, RCA, triage) are in
+  [`PROMPTS.md`](PROMPTS.md) §Session 6.

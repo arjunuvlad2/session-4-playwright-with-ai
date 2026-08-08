@@ -1,0 +1,25 @@
+<!doctype html>
+<!--
+  Tiny local fixture for EXERCISE 7.2. Click Submit and, after a RANDOM delay
+  (300–1700 ms), a success banner appears — exactly like a real form that
+  sometimes responds fast and sometimes slow. No server, no network.
+-->
+<html>
+  <head><meta charset="utf-8" /><title>Submit form</title></head>
+  <body>
+    <h1>Submit form</h1>
+    <button id="submit">Submit</button>
+    <script>
+      document.getElementById("submit").addEventListener("click", () => {
+        // The app takes an unpredictable amount of time — that's real life.
+        const delayMs = 300 + Math.floor(Math.random() * 1400); // 300–1700 ms
+        setTimeout(() => {
+          const banner = document.createElement("div");
+          banner.id = "success-banner";
+          banner.textContent = "Success! Your form was submitted.";
+          document.body.appendChild(banner);
+        }, delayMs);
+      });
+    </script>
+  </body>
+</html>
